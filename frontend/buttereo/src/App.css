@@ -1,0 +1,932 @@
+.appShell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.appMain {
+  padding: 20px;
+  flex: 1;
+}
+
+.topBar {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: center;
+  border-bottom: 2px solid var(--border);
+  padding: 10px 14px;
+}
+
+.topBarRight {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-self: end;
+}
+
+.adminNavLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.logoutForm {
+  margin: 0;
+}
+
+.navButton {
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-h);
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.searchWrap {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 5px;
+  align-items: center;
+}
+
+.searchLabel {
+  color: var(--text-h);
+  font-size: 14px;
+}
+
+.searchInput {
+  width: 50%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 6px 8px;
+}
+
+.filterPanelSearch {
+  width: 100%;
+}
+
+.filterPanelSearch .searchInput {
+  width: 100%;
+}
+
+.filterSearchForm {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: -5px;
+}
+
+.filterSearchSubmitButton {
+  align-self: end;
+  width: 35%;
+  text-align: center;
+  margin-right: 5px;
+}
+
+.homePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.brandTitle {
+  font-size: 70px;
+  font-weight: 800;
+  text-align: center;
+  margin: 32px 0 0 0;
+}
+
+.welcomeTitle {
+  font-size: 30px;
+  text-align: center;
+  margin: 0 0 0 0;
+}
+
+.homeGrid {
+  width: min(100%, 980px);
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 0;
+  border: 2px solid var(--border);
+  min-height: 360px;
+}
+
+.panelBox {
+  border: 1px solid var(--border);
+  padding: 16px;
+  text-align: left;
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.filterPanel {
+  border-top: 0;
+  border-left: 0;
+  border-bottom: 0;
+  align-content: start;
+}
+
+.filterPanelHint {
+  margin: 0 0 8px 0;
+  font-size: 0.85rem;
+  color: var(--text);
+}
+
+.filterGroup {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.filterGroupTitle {
+  margin: 0 0 7px 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.filterButtonStack {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.filterButtonStackRow {
+  flex-direction: column;
+}
+
+.filterOptionButton {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-h);
+  font-size: 0.85rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.filterOptionButton:hover {
+  opacity: 0.9;
+}
+
+.filterOptionButtonActive {
+  background: var(--code-bg);
+  border-color: var(--text-h);
+  font-weight: 600;
+}
+
+.filterStackNote {
+  margin: 4px 0 0;
+  font-size: 0.8rem;
+  color: var(--text);
+}
+
+.filterResetButton {
+  margin-top: 14px;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-h);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.filterResetButton:hover {
+  opacity: 0.9;
+}
+
+.productPanel {
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.panelTitle {
+  margin: 0 0 10px 0;
+  font-weight: 700;
+  color: var(--text-h);
+}
+
+.productList {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  align-items: start;
+}
+
+.productCard {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 8px;
+  display: grid;
+  gap: 8px;
+}
+
+.productCard h3,
+.productCard p {
+  margin: 0;
+}
+
+.productCardTitle {
+  line-clamp: 2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; 
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+
+  min-height: 3em; 
+  line-height: 1.5em; 
+  
+  font-size: 1.1rem; 
+  color: var(--text-h);
+}
+
+.productCardImage {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+}
+
+.productCardImageFallback {
+  width: 100%;
+  height: 120px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+  color: var(--text);
+  display: grid;
+  place-items: center;
+  font-size: 0.85rem;
+}
+
+.smallButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-h);
+  background: transparent;
+  
+}
+
+.simplePage {
+  display: grid;
+  gap: 16px;
+  justify-items: center;
+  align-content: start;
+}
+
+.productDetailsPage {
+  width: min(100%, 980px);
+}
+
+.productDetailsCard {
+  width: min(100%, 760px);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+  text-align: left;
+}
+
+.productDetailsCard h1,
+.productDetailsCard h2,
+.productDetailsCard p {
+  margin: 0;
+}
+
+.productDetailsPrice {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-h);
+}
+
+.productDetailsImage {
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+}
+
+.productDetailsImageFallback {
+  width: 100%;
+  min-height: 220px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: grid;
+  place-items: center;
+  background: var(--code-bg);
+  color: var(--text);
+}
+
+.productDetailsMetaGrid {
+  display: grid;
+  gap: 6px;
+}
+
+.productDetailsDescription {
+  display: grid;
+  gap: 8px;
+}
+
+.productDetailsBackButton {
+  justify-self: start;
+  font-size: 13px;
+  padding: 2px 6px 2px 6px;
+  border: 1.5px solid var(--border);
+  margin-bottom: 10px;
+}
+
+.cartGrid {
+  width: min(100%, 980px);
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 16px;
+}
+
+.cartItem,
+.orderRow {
+  display: grid;
+  gap: 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.orderHistoryList {
+  display: grid;
+  gap: 12px;
+}
+
+.orderMetaGrid {
+  display: grid;
+  gap: 6px;
+}
+
+.orderMetaGrid p {
+  margin: 0;
+}
+
+.orderItemsList {
+  display: grid;
+  gap: 8px;
+}
+
+.orderItemInfo {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 8px;
+  display: grid;
+  gap: 4px;
+}
+
+.orderItemInfo p {
+  margin: 0;
+}
+
+.orderItemImage,
+.orderItemImageFallback {
+  width: 100%;
+  max-width: 220px;
+  height: 130px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+}
+
+.orderItemImage {
+  object-fit: cover;
+}
+
+.orderItemImageFallback {
+  display: grid;
+  place-items: center;
+  color: var(--text);
+}
+
+.cartItemMain {
+  display: grid;
+  gap: 4px;
+}
+
+.cartItemImage {
+  width: 100%;
+  max-width: 220px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+}
+
+.cartItemImageFallback {
+  width: 100%;
+  max-width: 220px;
+  height: 140px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+  color: var(--text);
+  display: grid;
+  place-items: center;
+}
+
+.cartItemActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.cartItemActions input {
+  width: 80px;
+  padding: 5px 6px;
+}
+
+.productDetailCartPanel {
+  width: min(100%, 760px);
+}
+
+.checkoutPage {
+  width: min(100%, 760px);
+}
+
+.checkoutPanel {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.checkoutItemsList {
+  display: grid;
+  gap: 10px;
+}
+
+.checkoutItemRow {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 8px;
+  display: grid;
+  gap: 4px;
+}
+
+.checkoutItemImage,
+.checkoutItemImageFallback {
+  width: 100%;
+  max-width: 220px;
+  height: 130px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+}
+
+.checkoutItemImage {
+  object-fit: cover;
+}
+
+.checkoutItemImageFallback {
+  display: grid;
+  place-items: center;
+  color: var(--text);
+}
+
+.checkoutHomeButton {
+  padding: 6px 14px;
+}
+
+.accountGrid {
+  width: min(100%, 980px);
+  max-width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  /* Fixed menu column; right column may shrink without stealing width from the menu */
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.accountNav {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.accountBody {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+
+.accountGridAdmin {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.accountNavButtons {
+  display: grid;
+  gap: 8px;
+  width: 100%;
+}
+
+.accountNavButton {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-h);
+  padding: 8px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: left;
+}
+
+.accountNavButton:hover {
+  opacity: 0.9;
+}
+
+.accountNavButtonActive {
+  background: var(--text-h);
+  color: var(--bg);
+  border-color: var(--text-h);
+}
+
+.profileInfoList {
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.profileInfoRow {
+  display: grid;
+  grid-template-columns: minmax(0, 140px) 1fr;
+  gap: 10px 16px;
+  align-items: baseline;
+}
+
+.profileInfoRow dt {
+  margin: 0;
+  font-weight: 600;
+  color: var(--text-h);
+  font-size: 0.95rem;
+}
+
+.profileInfoRow dd {
+  margin: 0;
+  font-size: 0.95rem;
+  word-break: break-word;
+}
+
+.profileInfoStatus {
+  margin: 0;
+  color: var(--text-h);
+}
+
+.profileInfoError {
+  margin: 0;
+  color: #a40000;
+}
+
+.profileActionBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.editProfileForm input[readonly] {
+  background: #f4f4f4;
+  color: var(--text);
+  cursor: not-allowed;
+}
+
+.profileEditFooter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.profileEditBack {
+  background: var(--bg);
+  color: var(--text-h);
+}
+
+.simpleList {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.registerForm {
+  width: min(100%, 430px);
+  display: grid;
+  gap: 10px;
+}
+
+.formField {
+  display: grid;
+  gap: 4px;
+  text-align: left;
+}
+
+.formField input,
+.formField textarea,
+.formField select {
+  padding: 8px;
+}
+
+.loginPageWrap {
+  padding: 8px 0 24px;
+}
+
+.loginHint {
+  max-width: 28rem;
+  margin: 0;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.loginForm {
+  width: min(100%, 22rem);
+  display: grid;
+  gap: 14px;
+  margin-top: 8px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  box-sizing: border-box;
+}
+
+.loginSubmit {
+  margin-top: 4px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--text-h);
+  color: var(--bg);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.loginSubmit:hover {
+  opacity: 0.92;
+}
+
+.loginFooter {
+  margin-top: 16px;
+  font-size: 0.95rem;
+}
+
+.loginFooter a {
+  color: var(--text-h);
+}
+
+.routeLoading {
+  margin: 24px;
+  text-align: center;
+  color: var(--text);
+}
+
+.inventoryPage {
+  width: min(100%, 900px);
+  text-align: left;
+  align-items: stretch;
+}
+
+.inventoryNote {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.inventoryPanel {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.inventoryToolbar {
+  margin-bottom: 12px;
+}
+
+.inventoryTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.inventoryTable th,
+.inventoryTable td {
+  border: 1px solid var(--border);
+  padding: 8px 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.inventoryTable th {
+  background: var(--code-bg);
+  color: var(--text-h);
+  font-weight: 600;
+}
+
+.adminUsersTableWrap {
+  overflow-x: auto;
+}
+
+.adminRoleSelect {
+  min-width: 110px;
+  padding: 6px 8px;
+}
+
+.adminUserInput {
+  width: 100%;
+  min-width: 120px;
+  box-sizing: border-box;
+  padding: 6px 8px;
+}
+
+.adminRoleButton {
+  white-space: nowrap;
+}
+
+.adminActionButtons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.adminDeleteButton {
+  white-space: nowrap;
+}
+
+.adminHistoryButton {
+  white-space: nowrap;
+}
+
+.adminOrderHistoryPanel {
+  margin-top: 6px;
+}
+
+.adminAccountToolbar {
+  width: min(100%, 980px);
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+
+.salesHistoryHeader {
+  width: min(100%, 980px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.salesHistoryHeader h1 {
+  margin:10px 0 20px 0;
+  width: 100%;
+  text-align: center;
+}
+
+.salesHistoryFilters {
+  width: min(100%, 980px);
+  box-sizing: border-box;
+}
+
+.salesHistoryFilterGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 16px;
+}
+
+.salesHistoryFilterActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+@media (max-width: 640px) {
+  .salesHistoryFilterGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.inventoryActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.inventoryActionsCell {
+  min-width: 170px;
+}
+
+.inventoryThumbCell {
+  width: 72px;
+  vertical-align: middle;
+}
+
+.inventoryThumb {
+  display: block;
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.thumbFallback {
+  display: inline-block;
+  min-width: 56px;
+  font-size: 0.85rem;
+  color: var(--text);
+}
+
+.inventoryEmpty {
+  margin: 12px 0 0;
+  color: var(--text);
+}
+
+.addProductPage {
+  width: min(100%, 480px);
+  text-align: left;
+  align-items: stretch;
+}
+
+.addProductForm {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.formFieldRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.addProductActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.formError {
+  color: #b91c1c;
+  margin: 12px 0 0;
+  text-align: left;
+  max-width: 28rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .formError {
+    color: #fca5a5;
+  }
+}
+
+@media (max-width: 900px) {
+  .productList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .homeGrid,
+  .accountGrid,
+  .cartGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .filterPanel,
+  .productPanel {
+    border: 1px solid var(--border);
+  }
+}
+
+@media (max-width: 640px) {
+  .productList {
+    grid-template-columns: 1fr;
+  }
+}
