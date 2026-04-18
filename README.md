@@ -12,7 +12,7 @@ SQL scripts are in `./db` folder.
 1. Download and unzip the project file.
 2. Open the project file in IDE. (I used IntelliJ 2026.1)
 3. Please change db properties in `./src/main/resources/application.properties` to your local DB setting.
-<img width="500" height="500" alt="application properties setup" src="https://github.com/user-attachments/assets/4199e012-fa95-47c8-b309-75f8900f6311" />
+<img width="600" height="350" alt="application properties setup" src="https://github.com/user-attachments/assets/4199e012-fa95-47c8-b309-75f8900f6311" />
 4. Run the MySQL.
 5. Run the backend (port#: 8080).
 6. Open the frontend repository (`/front/buttereo`) in another IDE.
