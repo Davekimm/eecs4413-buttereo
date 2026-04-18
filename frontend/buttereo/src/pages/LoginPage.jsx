@@ -4,7 +4,7 @@ const LOGIN_ACTION = "http://localhost:8080/login";
 
 export function LoginPage() {
   const [searchParams] = useSearchParams();
-  // Spring Security form login failed → redirect to /login?error (backend forwards query to this SPA URL).
+  
   const showLoginFailed = searchParams.has("error");
 
   return (
