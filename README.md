@@ -1,27 +1,19 @@
-Used Springboot for backend, React for Frontend, and MySQL for DB.
+# I used Springboot for backend, React for Frontend, and MySQL for DB.
 
-Frontend source code is in '/front/buttereo'
+# Frontend source code is in '/front/buttereo'.
 
-SQL scripts are in '/db'.
+# SQL scripts are in '/db'.
 
-To test it locally
-
+# To test it locally...
 1. Download and unzip the project file.
-
 2. Open the project file in IDE. (I used IntelliJ 2026.1)
-
 3. Please change db properties in 'src/main/resources/application.properties' to your local DB setting.
-
 4. Run the MySQL.
-
 5. Run the backend (port#: 8080).
-
 6. Open the frontend source code ('/front/buttereo') in another IDE.
-
 7. Type npm install in the terminal to install node_mudules.
-
 8. Type npm run dev in the terminal to run Vite (port#: 5173).
 
-Admin's credential
+# Admin's credential for the website
 username: dk
 password: 123
