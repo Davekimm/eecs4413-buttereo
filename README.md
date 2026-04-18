@@ -14,13 +14,13 @@ SQL scripts are in `./db` folder.
 3. Please change db properties in `./src/main/resources/application.properties` to your local DB setting.
 <img width="550" height="270" alt="application properties setup" src="https://github.com/user-attachments/assets/4199e012-fa95-47c8-b309-75f8900f6311" />
 
-<br><br/>
+<br>
 4. Run the MySQL.
 5. Run the backend (port#: 8080).
 6. Open the frontend repository (`/front/buttereo`) in another IDE.
 7. Type npm install in the terminal to install node_mudules.
 8. Type npm run dev in the terminal to run Vite (port#: 5173).
-
+<br/>
 ## Admin's credential for the website
 - username: dk
 - password: 123
