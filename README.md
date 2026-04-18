@@ -4,8 +4,6 @@ Frontend source code is in '/front/buttereo'
 
 SQL scripts are provided in the submission.
 
-online URL link is : 
-
 To test it locally
 1. Download and unzip the project file.
 2. Open the project file in IDE. (I used IntelliJ 2026.1)
