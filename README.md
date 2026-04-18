@@ -3,7 +3,7 @@ I used <b>Springboot</b> for backend, <b>React</b> for Frontend, and <b>MySQL</b
 
 This repository is the ***backend Springboot project folder*** that contains Frontend files inside. 
 
-Frontend repository is `./front/buttereo`.
+Frontend source code is `./front/buttereo`.
 
 SQL scripts are in `./db` folder.
 
