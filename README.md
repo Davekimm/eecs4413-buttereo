@@ -1,37 +1,27 @@
-#!/bin/bash
+Used Springboot for backend, React for Frontend, and MySQL for DB.
 
-# 1. Define the content (This uses the "pretty" version we created)
-README_CONTENT="# 🧈 Buttereo E-Commerce Platform
+Frontend source code is in '/front/buttereo'
 
-A robust, full-stack e-commerce application.
+SQL scripts are in '/db'.
 
-## 🚀 Tech Stack
-- **Backend:** Spring Boot (Port 8080)
-- **Frontend:** React + Vite (Port 5173)
-- **Database:** MySQL
+To test it locally
 
-## 🛠️ Quick Start
-1. Update \`src/main/resources/application.properties\` with your DB credentials.
-2. Run MySQL and execute scripts in \`/db\`.
-3. Start Backend via IntelliJ.
-4. In \`/front/buttereo\`, run \`npm install\` and \`npm run dev\`.
+1. Download and unzip the project file.
 
-## 🔐 Admin Access
-- **User:** dk
-- **Pass:** 123"
+2. Open the project file in IDE. (I used IntelliJ 2026.1)
 
-# 2. Write the content to the README.md file
-echo "$README_CONTENT" > README.md
+3. Please change db properties in 'src/main/resources/application.properties' to your local DB setting.
 
-echo "✅ README.md has been updated locally."
+4. Run the MySQL.
 
-# 3. Optional: Auto-push to GitHub
-read -p "Push changes to GitHub? (y/n): " confirm
-if [ "$confirm" == "y" ]; then
-    git add README.md
-    git commit -m "docs: update readme structure"
-    git push
-    echo "🚀 Changes pushed to GitHub!"
-else
-    echo "📂 Changes saved locally only."
-fi
+5. Run the backend (port#: 8080).
+
+6. Open the frontend source code ('/front/buttereo') in another IDE.
+
+7. Type npm install in the terminal to install node_mudules.
+
+8. Type npm run dev in the terminal to run Vite (port#: 5173).
+
+Admin's credential
+username: dk
+password: 123
