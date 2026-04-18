@@ -20,7 +20,7 @@ SQL scripts are in `./db` folder.
 6. Open the frontend repository (`/front/buttereo`) in another IDE.
 7. Type npm install in the terminal to install node_mudules.
 8. Type npm run dev in the terminal to run Vite (port#: 5173).
-<br/>
+
 ## Admin's credential for the website
 - username: dk
 - password: 123
