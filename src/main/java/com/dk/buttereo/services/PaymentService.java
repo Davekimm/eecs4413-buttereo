@@ -4,6 +4,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Payment service for managing Payment Strategies
+ */
 @Service
 public class PaymentService {
 
@@ -14,6 +17,12 @@ public class PaymentService {
         this.strategies = strategies;
     }
 
+    /**
+     * Verify payment using card number
+     *
+     * @param cardNumber credit card number
+     * @throws RuntimeException if payment verification fails
+     */
     public void verifyPayment(String cardNumber) {
 
         IPaymentStrategy payment = strategies.stream()
@@ -28,6 +37,5 @@ public class PaymentService {
         }
 
     }
-
 }
 

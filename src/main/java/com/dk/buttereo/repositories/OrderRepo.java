@@ -8,11 +8,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Repository interface for managing order data.
+ */
 @Repository
 public interface OrderRepo extends JpaRepository<Orders, Integer> {
     List<Orders> findByUserUsername(String username);
     Orders findFirstByUserUsernameOrderByIdDesc(String username);
     void deleteByUserUsername(String username);
-
     List<Orders> findAll(Specification<Orders> spec, Sort sort);
 }

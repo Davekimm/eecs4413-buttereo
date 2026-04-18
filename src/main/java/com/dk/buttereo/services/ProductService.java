@@ -14,6 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Service class for managing product-related operations.
+ */
 @Service
 public class ProductService {
 
@@ -23,11 +26,22 @@ public class ProductService {
     @Autowired
     private ProductRepo productRepo;
 
+    /**
+     * Get all products
+     *
+     * @return List of product DTOs
+     */
     public List<ProductDTO> getAllProducts() {
         List<Product> orders = productRepo.findAll();
         return orders.stream().map(ProductDTO::fromProduct).toList();
     }
 
+    /**
+     * Get product by id
+     *
+     * @param id product id
+     * @return product DTO
+     */
     public ProductDTO getProductById(int id) {
         Product product = productRepo.findById(id).orElse(null);
         if(product == null)
@@ -36,6 +50,12 @@ public class ProductService {
         return ProductDTO.fromProduct(product);
     }
 
+    /**
+     * Get product image by id
+     *
+     * @param id product id
+     * @return product image
+     */
     @Transactional
     public ProductImage getProductImage(int id) {
         Product product = productRepo.findById(id).orElse(null);
@@ -55,11 +75,26 @@ public class ProductService {
         return new ProductImage(data, contentType);
     }
 
+    /**
+     * Search products by keyword
+     *
+     * @param keyword search keyword
+     * @return list of product DTOs
+     */
     public List<ProductDTO> searchProducts(String keyword) {
         List<Product> products = productRepo.searchProducts(keyword);
         return products.stream().map(ProductDTO::fromProduct).toList();
     }
 
+    /**
+     * Filter products by keyword, category, and sorting
+     *
+     * @param keyword search keyword
+     * @param category product category
+     * @param sortNameAsc sort by name ascending
+     * @param sortPriceAsc sort by price ascending
+     * @return list of product DTOs
+     */
     public List<ProductDTO> filterProducts(String keyword, String category, boolean sortNameAsc, boolean sortPriceAsc) {
         Specification<Product> spec = (_, _, cb) -> cb.conjunction();
 
@@ -85,6 +120,13 @@ public class ProductService {
         return products.stream().map(ProductDTO::fromProduct).toList();
     }
 
+    /**
+     * Add a new product
+     *
+     * @param product product
+     * @param imageFile product image
+     * @return product DTO
+     */
     @Transactional
     public ProductDTO addProduct(Product product, MultipartFile imageFile) throws IOException {
         if (imageFile == null || imageFile.isEmpty()) {
@@ -106,6 +148,14 @@ public class ProductService {
         return ProductDTO.fromProduct(savedProduct);
     }
 
+    /**
+     * Update product
+     *
+     * @param id product id
+     * @param product product
+     * @param imageFile product image
+     * @return product DTO
+     */
     @Transactional
     public ProductDTO updateProduct(int id, Product product, MultipartFile imageFile) throws IOException {
         Product existing = productRepo.findById(id).orElse(null);
@@ -142,6 +192,11 @@ public class ProductService {
         return ProductDTO.fromProduct(updatedProduct);
     }
 
+    /**
+     * Delete product
+     *
+     * @param id product id
+     */
     @Transactional
     public void deleteProduct(int id) {
         productRepo.deleteById(id);

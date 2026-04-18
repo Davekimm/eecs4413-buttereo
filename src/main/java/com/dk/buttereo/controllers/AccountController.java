@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Controller for user account management.
+ */
 @RestController
 @CrossOrigin
 @RequestMapping("/api/account")
@@ -20,7 +23,13 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    // Get the current authenticated user info
+
+    /**
+     * Retrieves the current authenticated user's information.
+     *
+     * @param authentication The user authentication object.
+     * @return ResponseEntity containing the user's information or an error response.
+     */
     @GetMapping
     public ResponseEntity<?> getAuthenticatedUser(Authentication authentication) {
         if (authentication == null) {
@@ -32,7 +41,13 @@ public class AccountController {
         return ResponseEntity.ok(user);
     }
 
-    // Update the current user's info
+    /**
+     * Updates the current user's information.
+     *
+     * @param authentication The user authentication object.
+     * @param user The updated user information.
+     * @return ResponseEntity indicating success or error.
+     */
     @PutMapping
     public ResponseEntity<?> updateAuthenticatedUser(Authentication authentication, @RequestBody UserDTO user) {
         if (authentication == null) {
@@ -44,7 +59,13 @@ public class AccountController {
         return ResponseEntity.ok(userDTO);
     }
 
-    // Change the current user's password
+    /**
+     * Changes the current user's password.
+     *
+     * @param authentication The user authentication object.
+     * @param request The password change request containing the new password.
+     * @return ResponseEntity indicating success or error.
+     */
     @PutMapping("/change-password")
     public ResponseEntity<?> updatePassword(Authentication authentication, @RequestBody Map<String, String> request) {
         if (authentication == null) {
@@ -56,6 +77,12 @@ public class AccountController {
         return ResponseEntity.ok("Password updated successfully");
     }
 
+    /**
+     * Deletes the current authenticated user's account.
+     *
+     * @param authentication The user authentication object.
+     * @return ResponseEntity indicating success or error.
+     */
     @DeleteMapping( "/delete")
     public ResponseEntity<?> deleteAuthenticatedUser(Authentication authentication) {
         if (authentication == null) {
@@ -69,7 +96,11 @@ public class AccountController {
 
     //---------------------------------------------------- ADMIN -----------------------------------------------------
 
-    // For ADMIN only - Get all users
+    /**
+     * Retrieves all users for administrative purposes.
+     *
+     * @return ResponseEntity containing a list of user DTOs or an error response.
+     */
     @GetMapping("/admin/all")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getAllUsers() {
@@ -77,7 +108,13 @@ public class AccountController {
         return ResponseEntity.ok(userDTOs);
     }
 
-    // For ADMIN only - Update user's info(email, phone, address, and cardNumber.)
+    /**
+     * Updates user information for administrative purposes.
+     *
+     * @param username The username of the user to update.
+     * @param user The updated user information.
+     * @return ResponseEntity indicating success or error.
+     */
     @PutMapping("/admin/update/{username}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> updateUserInfoByAdmin(@PathVariable String username, @RequestBody UserDTO user) {
@@ -89,7 +126,12 @@ public class AccountController {
         return ResponseEntity.ok(userDTO);
     }
 
-    // For ADMIN only - Delete user
+    /**
+     * Deletes a user for administrative purposes.
+     *
+     * @param username The username of the user to delete.
+     * @return ResponseEntity indicating success or error.
+     */
     @DeleteMapping("/admin/delete/{username}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> deleteUser(@PathVariable String username) {

@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * Entity class for carts.
+ */
 @Entity
 @Data
 @AllArgsConstructor

@@ -7,10 +7,18 @@ import org.springframework.data.jpa.domain.Specification;
 
 import java.time.LocalDateTime;
 
-// Detailed rule class for Specification for Product.
-// Separating this from Services.
+/**
+ * Detailed rule class for Specification for Product.
+ * Separating this from Services.
+ */
 public class OrderSpecifications {
 
+    /**
+     * Specification for orders within a date range.
+     * @param startDate Start date of the range
+     * @param endDate End date of the range
+     * @return Specification for date range
+     */
     public static Specification<Orders> betweenDate(LocalDateTime startDate, LocalDateTime endDate) {
 
         return (root, _, cb) -> {
@@ -24,6 +32,11 @@ public class OrderSpecifications {
         };
     }
 
+    /**
+     * Specification for orders containing a specific product name.
+     * @param productName Name of the product
+     * @return Specification for product name
+     */
     public static Specification<Orders> containsProduct(String productName) {
         return (root, _, cb) -> {
             Join<Orders, OrderItem> items = root.join("orderItems");
@@ -31,6 +44,11 @@ public class OrderSpecifications {
         };
     }
 
+    /**
+     * Specification for orders containing a specific category.
+     * @param category Category of the product
+     * @return Specification for category
+     */
     public static Specification<Orders> containsCategory(String category) {
         return (root, _, cb) -> {
             Join<Orders, OrderItem> items = root.join("orderItems");

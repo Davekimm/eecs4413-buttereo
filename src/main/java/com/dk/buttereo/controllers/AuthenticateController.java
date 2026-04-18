@@ -15,6 +15,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controller for user authentication and registration.
+ */
 @RestController
 @CrossOrigin
 @RequestMapping("/api/auth")
@@ -26,7 +29,13 @@ public class AuthenticateController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    // Register a new user
+    /**
+     * Register a new user
+     *
+     * @param user The user registration data.
+     * @param request The HTTP request object.
+     * @return ResponseEntity indicating success or error.
+     */
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody Users user, HttpServletRequest request) {
         String password = user.getPassword();
@@ -35,15 +44,15 @@ public class AuthenticateController {
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Registration failed. Please try again.");
         }
 
-        // Verify username/password with UserDetailsService.
+        // Create authentication object and holds UserDetailsService object of the current user.
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(newUser.getUsername(), password)
         );
-        SecurityContext context = SecurityContextHolder.createEmptyContext();   // A context for the current authenticated user.
+        SecurityContext context = SecurityContextHolder.createEmptyContext();   // A context(ID card) for the current authenticated user.
         context.setAuthentication(authentication);
         SecurityContextHolder.setContext(context);
 
-        // Get the current session and attach the security context.
+        // Get the current session and attach the security context, then send back to Frontend with the session info.
         request.getSession(true).setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, context);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(UserDTO.fromUser(newUser));

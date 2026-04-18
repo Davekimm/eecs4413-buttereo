@@ -4,6 +4,9 @@ import jakarta.persistence.Lob;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Data Transfer Object for OrderItem
+ */
 @Getter
 @Setter
 public class OrderItemDTO {
@@ -25,6 +28,11 @@ public class OrderItemDTO {
     @Lob
     private byte[] imageData;
 
+    /**
+     * Converts an OrderItem entity to an OrderItemDTO.
+     * @param orderItem The OrderItem entity to convert.
+     * @return The corresponding OrderItemDTO.
+     */
     public static OrderItemDTO fromOrderItem(OrderItem orderItem) {
         OrderItemDTO orderItemDTO = new OrderItemDTO();
         orderItemDTO.orderedItemId = orderItem.getId();

@@ -6,6 +6,9 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Data Transfer Object for Order
+ */
 @Getter
 @Setter
 public class OrderDTO {
@@ -22,6 +25,11 @@ public class OrderDTO {
 
     private List<OrderItemDTO> orderItems;
 
+    /**
+     * Converts an Orders entity to an OrderDTO.
+     * @param order The Orders entity to convert.
+     * @return The corresponding OrderDTO.
+     */
     public static OrderDTO fromOrders(Orders order) {
         OrderDTO salesHistoryDTO = new OrderDTO();
         salesHistoryDTO.setUsername(order.getUser().getUsername());
@@ -37,6 +45,18 @@ public class OrderDTO {
                 .toList());
 
         return salesHistoryDTO;
+    }
+
+    @Override
+    public String toString() {
+        return "\nOrder summary : " +
+                "username='" + username + '\'' +
+                ", address='" + address + '\'' +
+                ", cardNumber='" + cardNumber + '\'' +
+                ", orderId=" + orderId +
+                ", orderDate=" + orderDate +
+                ", totalAmount=" + totalAmount +
+                ", orderItems=" + orderItems + "\n";
     }
 }
 

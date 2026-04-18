@@ -7,7 +7,9 @@ import lombok.Setter;
 
 import java.util.List;
 
-// Entity class for all users (both admin and regular users)
+/**
+ * Entity class for all users (both admin and regular users)
+ */
 @Setter
 @Getter
 @Entity

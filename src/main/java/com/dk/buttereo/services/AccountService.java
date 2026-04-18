@@ -17,6 +17,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service class for managing account-related operations.
+ */
 @Service
 public class AccountService implements UserDetailsService {
 
@@ -32,6 +35,12 @@ public class AccountService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * Load user details by username - used for authentication.
+     * @param userName User's username
+     * @return UserDetails object
+     * @throws UsernameNotFoundException if user not found
+     */
     @Override
     public UserDetails loadUserByUsername(String userName) {
         Users appUser = AccountRepo.findByUsername(userName);
@@ -46,7 +55,11 @@ public class AccountService implements UserDetailsService {
                     .build();
     }
 
-    // Returning a User object for authentication.
+    /**
+     * Register a new user.
+     * @param user User details
+     * @return Registered user
+     */
     @Transactional
     public Users register(Users user) {
         Users newUser = AccountRepo.save(user);
@@ -60,6 +73,11 @@ public class AccountService implements UserDetailsService {
         return newUser;
     }
 
+    /**
+     * Find user by username.
+     * @param userName User's username
+     * @return UserDTO object
+     */
     public UserDTO findByUsername(String userName) {
 
         Users user = AccountRepo.findByUsername(userName);
@@ -67,6 +85,13 @@ public class AccountService implements UserDetailsService {
         return UserDTO.fromUser(user);
     }
 
+    /**
+     * Update user information.
+     * @param username User's username
+     * @param user Updated user details
+     * @return Updated UserDTO object
+     * @throws UsernameNotFoundException if user not found
+     */
     @Transactional
     public UserDTO updateUserInfo(String username, UserDTO user) {
         Users existing = AccountRepo.findByUsername(username);
@@ -98,6 +123,11 @@ public class AccountService implements UserDetailsService {
         return UserDTO.fromUser(existing);
     }
 
+    /**
+     * Update user password.
+     * @param username User's username
+     * @param newPassword New password
+     */
     @Transactional
     public void updatePassword(String username, String newPassword) {
         Users existing = AccountRepo.findByUsername(username);
@@ -109,6 +139,10 @@ public class AccountService implements UserDetailsService {
         AccountRepo.save(existing);
     }
 
+    /**
+     * Delete user by username.
+     * @param username User's username
+     */
     @Transactional
     public void deleteUser(String username) {
         orderService.deleteOrder(username);
@@ -122,6 +156,10 @@ public class AccountService implements UserDetailsService {
         AccountRepo.deleteByUsername(username);
     }
 
+    /**
+     * Get all users.
+     * @return List of UserDTO objects
+     */
     public List<UserDTO> getAllUsersByAdmin() {
 
         List<Users> allUsers = AccountRepo.findAll();
@@ -135,6 +173,14 @@ public class AccountService implements UserDetailsService {
         return userDTOs;
     }
 
+    /**
+     * Update user information by admin.
+     * @param username User's username
+     * @param user Updated user details
+     * @return Updated UserDTO object
+     * @throws UsernameNotFoundException if user not found
+     */
+    @Transactional
     public UserDTO updateUserInfoByAdmin(String username, UserDTO user) {
         Users existing = AccountRepo.findByUsername(username);
         if (existing == null) {

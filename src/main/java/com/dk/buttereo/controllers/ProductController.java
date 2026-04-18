@@ -13,6 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Controller class for managing product-related operations.
+ */
 @RestController
 @CrossOrigin
 @RequestMapping("/api/product")
@@ -21,12 +24,23 @@ public class ProductController {
     @Autowired
     private ProductService service;
 
+    /**
+     * Retrieves all products.
+     *
+     * @return ResponseEntity containing a list of ProductDTO objects or HTTP status code.
+     */
     @GetMapping("/all")
     public ResponseEntity<List<ProductDTO>> getAllProducts()
     {
         return ResponseEntity.ok(service.getAllProducts());
     }
 
+    /**
+     * Retrieves a product by its ID.
+     *
+     * @param id The ID of the product to retrieve.
+     * @return ResponseEntity containing the ProductDTO object or HTTP status code.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> getProduct(@PathVariable int id)
     {
@@ -36,6 +50,12 @@ public class ProductController {
 
     }
 
+    /**
+     * Retrieves the image associated with a product by its ID.
+     *
+     * @param id The ID of the product for which to retrieve the image.
+     * @return ResponseEntity containing the image data or HTTP status code.
+     */
     @GetMapping("/{id}/image")
     public ResponseEntity<byte[]> getImageByProductId(@PathVariable String id) {
         int productId;
@@ -55,6 +75,12 @@ public class ProductController {
                 .body(image.data());
     }
 
+    /**
+     * Searches for products based on a keyword.
+     *
+     * @param keyword The keyword to search for.
+     * @return ResponseEntity containing a list of ProductDTO objects or HTTP status code.
+     */
     @GetMapping("/search")
     public ResponseEntity<List<ProductDTO>> searchProducts(@RequestParam String keyword)
     {
@@ -65,6 +91,15 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
+    /**
+     * Filters products based on keyword, category, and sorting criteria.
+     *
+     * @param keyword The keyword to search for.
+     * @param category The category to filter by.
+     * @param sortName The sorting order for product names.
+     * @param sortPrice The sorting order for product prices.
+     * @return ResponseEntity containing a list of ProductDTO objects or HTTP status code.
+     */
     @GetMapping("/filter")
     public ResponseEntity<List<ProductDTO>> filterProducts( @RequestParam(required = false) String keyword,
                                                          @RequestParam(required = false) String category,
@@ -79,6 +114,13 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
+    /**
+     * Checks the availability of a product based on its ID and quantity.
+     *
+     * @param productId The ID of the product to check availability for.
+     * @param quantity The quantity to check availability for.
+     * @return ResponseEntity containing a list of ProductDTO objects or HTTP status code.
+     */
     @GetMapping("/{productId}/check-availability")
     public ResponseEntity<String> checkProductAvailability(@PathVariable int productId, @RequestParam int quantity) {
         ProductDTO product = service.getProductById(productId);
@@ -93,6 +135,13 @@ public class ProductController {
         return ResponseEntity.ok("Available: " + product.getQuantity());
     }
 
+    /**
+     * Adds a new product with an image file.
+     *
+     * @param product The product details to add.
+     * @param imageFile The image file for the product.
+     * @return ResponseEntity containing the newly added ProductDTO or HTTP status code.
+     */
     @PostMapping("/add")
     public ResponseEntity<?> addProduct(@RequestPart Product product, @RequestPart MultipartFile imageFile) {
         if (imageFile == null || imageFile.isEmpty()) {
@@ -106,6 +155,14 @@ public class ProductController {
         }
     }
 
+    /**
+     * Updates an existing product with an optional image file.
+     *
+     * @param id The ID of the product to update.
+     * @param product The updated product details.
+     * @param imageFile The optional image file for the product.
+     * @return ResponseEntity containing a success message or HTTP status code.
+     */
     @PutMapping("/update/{id}")
     public ResponseEntity<String> updateProduct(@PathVariable int id,
                                                 @RequestPart Product product,
@@ -124,6 +181,12 @@ public class ProductController {
         }
     }
 
+    /**
+     * Deletes a product by its ID.
+     *
+     * @param id The ID of the product to delete.
+     * @return ResponseEntity containing a success message or HTTP status code.
+     */
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteProduct(@PathVariable int id)
     {

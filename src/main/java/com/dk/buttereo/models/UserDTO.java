@@ -3,6 +3,9 @@ package com.dk.buttereo.models;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Data Transfer Object for user information.
+ */
 @Getter
 @Setter
 public class UserDTO {
@@ -20,6 +23,11 @@ public class UserDTO {
 
     private String role;
 
+    /**
+     * Converts a Users entity to a UserDTO.
+     * @param user The Users entity to convert.
+     * @return The corresponding UserDTO.
+     */
     public static UserDTO fromUser(Users user) {
         UserDTO userDTO = new UserDTO();
         userDTO.setUsername(user.getUsername());

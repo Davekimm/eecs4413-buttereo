@@ -12,6 +12,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service class for managing order-related operations. Subject to Observer Pattern
+ */
 @Service
 public class OrderService {
 
@@ -27,12 +30,24 @@ public class OrderService {
     @Autowired
     private ProductRepo productRepo;
 
+    /**
+     * Get the latest order by username
+     *
+     * @param username username
+     * @return OrderDTO
+     */
     public OrderDTO getOrderByUsername(String username) {
         Orders order = orderRepo.findFirstByUserUsernameOrderByIdDesc(username);
 
         return OrderDTO.fromOrders(order);
     }
 
+    /**
+     * Get all orders by username
+     *
+     * @param username username
+     * @return List of OrderDTO
+     */
     public List<OrderDTO> getAllOrdersByUsername(String username) {
         List<Orders> orders = orderRepo.findByUserUsername(username);
         List<OrderDTO> orderDTOs = new ArrayList<>();
@@ -41,11 +56,16 @@ public class OrderService {
         return orderDTOs;
     }
 
+    /**
+     * Create an order
+     *
+     * @param username username
+     * @param orderRequest order request DTO
+     * @return OrderDTO
+     */
     @Transactional
     public OrderDTO createOrder(String username, OrderDTO orderRequest) {
         Users user = userRepo.findByUsername(username);
-
-        Orders order = new Orders();
 
         List<OrderItem> orderItems = new ArrayList<>();
         float totalPrice = 0;
@@ -70,30 +90,46 @@ public class OrderService {
             orderItem.setQuantity(cartItem.getQuantity());
             orderItem.setPrice(cartItem.getProduct().getPrice());
             totalPrice += cartItem.getProduct().getPrice() * cartItem.getQuantity();
-            orderItem.setOrder(order);
 
             orderItems.add(orderItem);
         }
 
-        order.setUser(user);
-        order.setAddress(orderRequest.getAddress());
-        order.setCardNumber(orderRequest.getCardNumber());
-        order.setOrderDate(LocalDateTime.now());
-        order.setTotalAmount(totalPrice);
-        order.setOrderItems(orderItems);
+        // Building an order by Builder pattern.
+        Orders order = Orders.builder()
+                            .user(user)
+                            .address(orderRequest.getAddress())
+                            .cardNumber(orderRequest.getCardNumber())
+                            .orderDate(LocalDateTime.now())
+                            .totalAmount(totalPrice)
+                            .orderItems(orderItems)
+                            .build();
 
-        cart.getCartItems().clear();
+        order.getOrderItems().forEach(item -> item.setOrder(order));
 
         orderRepo.save(order);
 
         return OrderDTO.fromOrders(order);
     }
 
+    /**
+     * Delete an order by username
+     *
+     * @param username username
+     */
     @Transactional
     public void deleteOrder(String username) {
         orderRepo.deleteByUserUsername(username);
     }
 
+    /**
+     * Get the sales history of the user
+     *
+     * @param startDate start date
+     * @param endDate end date
+     * @param productName product name
+     * @param categoryName category name
+     * @return List of OrderDTO
+     */
     public List<OrderDTO> getFilterSalesHistory(LocalDateTime startDate, LocalDateTime endDate,
                                                String productName, String categoryName)
     {

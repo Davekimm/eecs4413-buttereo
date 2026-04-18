@@ -4,6 +4,9 @@ import jakarta.persistence.Lob;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Data Transfer Object for product information.
+ */
 @Getter
 @Setter
 public class ProductDTO {
@@ -22,6 +25,11 @@ public class ProductDTO {
     @Lob
     private byte[] imageData;
 
+    /**
+     * Converts a Product entity to a ProductDTO.
+     * @param product The Product entity to convert.
+     * @return The corresponding ProductDTO.
+     */
     public static ProductDTO fromProduct(Product product) {
         ProductDTO productDTO = new ProductDTO();
         productDTO.id = product.getId();
