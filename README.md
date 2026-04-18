@@ -2,7 +2,7 @@ Used Springboot for backend, React for Frontend, and MySQL for DB.
 
 Frontend source code is in '/front/buttereo'
 
-SQL scripts are in 'db/mysql'.
+SQL scripts are provided in the submission.
 
 online URL link is : 
 
