@@ -1,4 +1,5 @@
-# I used Springboot for backend, React for Frontend, and MySQL for DB.
+# Tech stacks used
+I used Springboot for backend, React for Frontend, and MySQL for DB.
 
 # Frontend source code is in '/front/buttereo'.
 
