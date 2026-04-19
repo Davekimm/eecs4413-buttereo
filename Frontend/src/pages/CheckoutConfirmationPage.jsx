@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, Navigate, useLocation } from "react-router-dom";
 import { productImageUrl } from "../config/api";
-
+ 
 function formatCurrency(value) {
   const amount = Number(value);
   if (!Number.isFinite(amount)) {
@@ -10,6 +10,7 @@ function formatCurrency(value) {
   return `$${amount.toFixed(2)}`;
 }
 
+/** Format placed at value. */
 function formatPlacedAt(value) {
   if (value == null || value === "") {
     return "";
@@ -28,6 +29,7 @@ function formatPlacedAt(value) {
   return date.toLocaleString();
 }
 
+/** Checkout product image. Uses GET /api/product/image. */
 function CheckoutProductImage({ productId, productName }) {
   const [imageUrl, setImageUrl] = useState(null);
   const [hasError, setHasError] = useState(false);
@@ -99,6 +101,7 @@ function CheckoutProductImage({ productId, productName }) {
   return <div className="checkoutItemImageFallback">{hasError ? "No image" : "Loading..."}</div>;
 }
 
+/** Checkout confirmation page. Uses GET /api/product/image. */
 export function CheckoutConfirmationPage() {
   const { state } = useLocation();
 

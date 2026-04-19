@@ -3,6 +3,7 @@ import { useAuth } from "../../context/AuthContext";
 import { CartWidget } from "./CartWidget";
 import { UserMenu } from "./UserMenu";
 
+/** Navigation bar. Uses GET /api/cart/items and GET /api/order/admin/all. */
 export function Navbar() {
   const { isSignedIn, isAdmin, profileLoaded, role } = useAuth();
 

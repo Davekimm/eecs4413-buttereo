@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { productImageUrl } from "../../config/api";
 
+/** Product card image. Uses GET /api/product/image. */
 export function ProductCardImage({ productId }) {
   const [imageUrl, setImageUrl] = useState(null);
   const [hasError, setHasError] = useState(false);

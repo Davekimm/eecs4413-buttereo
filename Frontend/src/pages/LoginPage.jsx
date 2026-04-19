@@ -2,6 +2,7 @@ import { Link, useSearchParams } from "react-router-dom";
 
 const LOGIN_ACTION = "http://localhost:8080/login";
 
+/** Login page. Uses POST /api/auth/login and GET /api/account. */
 export function LoginPage() {
   const [searchParams] = useSearchParams();
   

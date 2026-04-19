@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { productCheckAvailabilityUrl, productImageUrl } from "../../config/api";
 import { useCart } from "../../context/CartContext";
 
+/** Format price value. */
 function formatPrice(value) {
   const amount = Number(value);
   if (!Number.isFinite(amount)) {
@@ -11,6 +12,7 @@ function formatPrice(value) {
   return `$${amount.toFixed(2)}`;
 }
 
+/** Cart item. Uses GET /api/product/check-availability and PUT /api/cart/update-quantity and DELETE /api/cart/remove. */
 export function CartItem({ item }) {
   const { updateCartItemQuantity, removeFromCart } = useCart();
   const [draftQuantity, setDraftQuantity] = useState(item.quantity);
@@ -102,6 +104,7 @@ export function CartItem({ item }) {
     }
   }
 
+  /** Remove item from cart. */
   async function handleRemoveItem() {
     setErrorMessage("");
     setIsSubmitting(true);

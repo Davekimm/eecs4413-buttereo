@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { POST_LOGIN_REDIRECT_KEY, useAuth } from "../context/AuthContext";
 
 const formInitialData = {
   username: "",
@@ -12,6 +12,7 @@ const formInitialData = {
   address: "",
 };
 
+/** Registration page. Uses POST /api/auth/register. */
 export function RegisterPage() {
   const [formData, setFormData] = useState(formInitialData);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -46,7 +47,9 @@ export function RegisterPage() {
 
       setFormData(formInitialData);
       onRegisterSuccess(formData.firstName);
-      navigate("/cart");
+      const returnTo = localStorage.getItem(POST_LOGIN_REDIRECT_KEY);
+      localStorage.removeItem(POST_LOGIN_REDIRECT_KEY);
+      navigate(returnTo && returnTo.startsWith("/") ? returnTo : "/", { replace: true });
     } catch (error) {
       setErrorMessage(error.message || "Something went wrong during registration.");
     } finally {

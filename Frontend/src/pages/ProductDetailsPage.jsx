@@ -4,6 +4,7 @@ import { productCheckAvailabilityUrl, productDetailUrl, productImageUrl } from "
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
 
+/** Product details page. Uses GET /api/product/detail and GET /api/product/image. */
 export function ProductDetailsPage() {
   const { id } = useParams();
   const { state } = useLocation();
@@ -171,9 +172,7 @@ export function ProductDetailsPage() {
     { label: "Category", value: product.category || "N/A" },
     { label: "Availability", value: stockText },
   ];
-  // Guests and USER accounts use the cart (guest = localStorage; USER = API). Do not require
-  // role === "USER" here — stale sessionStorage or a failed /api/account call leaves role ""
-  // while isSignedIn is true, which wrongly blocked the old !isSignedIn || role === "USER" check.
+  
   const canAddToCart = !isAdmin;
   const maxSelectableQuantity = Number.isFinite(Number(product.quantity))
     ? Math.max(1, Number(product.quantity))

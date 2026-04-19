@@ -10,6 +10,7 @@ const defaultFilters = {
   sortPriceAsc: false,
 };
 
+/** Home page. Uses GET /api/product/all and GET /api/product/image. */
 export function HomePage() {
   const { welcomeText } = useAuth();
   const [filters, setFilters] = useState(defaultFilters);

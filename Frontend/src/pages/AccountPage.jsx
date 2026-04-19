@@ -13,6 +13,7 @@ const SECTION_COMPONENTS = {
   security: SecuritySettings,
 };
 
+/** Account page. Uses GET /api/account and GET /api/order/admin/all. */
 export function AccountPage() {
   const { isAdmin } = useAuth();
   const [activeSection, setActiveSection] = useState("profile");

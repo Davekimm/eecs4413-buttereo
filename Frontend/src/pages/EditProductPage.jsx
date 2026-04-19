@@ -13,6 +13,7 @@ const emptyForm = {
   available: true,
 };
 
+/** Map product data to form data. */
 function mapProductToForm(product) {
   return {
     name: product?.name ?? "",
@@ -25,6 +26,7 @@ function mapProductToForm(product) {
   };
 }
 
+/** Edit product page. Uses GET /api/product/detail and PUT /api/product. */
 export function EditProductPage() {
   const { id } = useParams();
   const { state } = useLocation();

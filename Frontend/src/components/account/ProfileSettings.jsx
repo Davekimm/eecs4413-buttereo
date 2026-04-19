@@ -17,6 +17,7 @@ function ProfileField({ label, value }) {
   );
 }
 
+/** Profile settings. Uses GET /api/account. */
 export function ProfileSettings() {
   const [user, setUser] = useState(null);
   const [loadError, setLoadError] = useState("");

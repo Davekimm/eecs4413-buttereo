@@ -1,6 +1,7 @@
 import { SearchBar } from "../layout/SearchBar";
 import { PRODUCT_CATEGORIES } from "../../constants/productCategories";
 
+/** Filter sidebar. Uses GET /api/product/filter. */
 export function FilterSidebar({
   filters,
   searchDraft,

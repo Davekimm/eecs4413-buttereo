@@ -1,7 +1,3 @@
-/**
- * Normalize backend order payloads: legacy JPA graph (nested product) or OrderDTO + OrderItemDTO.
- */
-
 export function parseOrderDate(rawValue) {
   if (rawValue == null || rawValue === "") {
     return null;
@@ -17,9 +13,6 @@ export function parseOrderDate(rawValue) {
   return Number.isNaN(parsed.getTime()) ? null : parsed;
 }
 
-/**
- * @returns {{ productId: number | null, orderedItemId: number | null, name: string, brand: string, price: number, quantity: number } | null}
- */
 export function mapOrderLineItem(item) {
   if (!item || typeof item !== "object") {
     return null;
@@ -59,9 +52,6 @@ export function mapOrderLineItem(item) {
   };
 }
 
-/**
- * Shape consumed by OrderRow and similar list UIs.
- */
 export function normalizeOrderForDisplay(order) {
   if (!order || typeof order !== "object") {
     return null;
@@ -84,9 +74,6 @@ export function normalizeOrderForDisplay(order) {
   };
 }
 
-/**
- * Checkout confirmation navigation state (subset of normalizeOrderForDisplay).
- */
 export function normalizeOrderForCheckoutSummary(order) {
   const row = normalizeOrderForDisplay(order);
   if (!row) {

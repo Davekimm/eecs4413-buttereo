@@ -10,11 +10,13 @@ import { OrderRow } from "./OrderRow";
 
 const DEFAULT_ROLE_OPTIONS = ["USER", "ADMIN"];
 
+/** Normalize role. Used in both backend and guest cart. */
 function normalizeRole(role) {
   if (typeof role !== "string") return "";
   return role.trim().toUpperCase();
 }
 
+/** Normalize user draft. Used in both backend and guest cart. */
 function normalizeUserDraft(user) {
   return {
     firstName: user?.firstName ?? "",
@@ -27,6 +29,7 @@ function normalizeUserDraft(user) {
   };
 }
 
+/** Admin users panel. Uses GET /api/account/admin/all and PUT /api/account/admin/update and DELETE /api/account/admin/delete. */
 export function AdminUsersPanel() {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

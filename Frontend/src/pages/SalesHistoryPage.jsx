@@ -14,6 +14,7 @@ function createEmptyFilters() {
   };
 }
 
+/** Admin sales history page. Uses GET /api/order/admin/sales-history. */
 export function SalesHistoryPage() {
   const [filters, setFilters] = useState(createEmptyFilters);
   const [appliedFilters, setAppliedFilters] = useState(createEmptyFilters);

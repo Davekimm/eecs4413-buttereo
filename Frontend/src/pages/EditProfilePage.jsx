@@ -12,6 +12,7 @@ const emptyForm = {
   cardNumber: "",
 };
 
+/** Edit profile page. Uses GET /api/account and PUT /api/account. */
 export function EditProfilePage() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(emptyForm);

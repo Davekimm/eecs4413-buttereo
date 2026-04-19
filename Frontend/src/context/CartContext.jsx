@@ -1,11 +1,12 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { cartAddUrl, cartClearUrl, cartItemsUrl, cartRemoveUrl, cartUpdateUrl } from "../config/api";
 import { useAuth } from "./AuthContext";
 
 const CartContext = createContext(null);
 const GUEST_CART_KEY = "buttereoGuestCart";
 
+/** Normalize cart item data. Used in both backend and guest cart. */
 function normalizeCartItem(item) {
   const product = item?.product ?? {};
   const rawQuantity = Number(item?.quantity);
@@ -34,6 +35,7 @@ function normalizeCartItem(item) {
   };
 }
 
+/** Normalize guest cart item data for localStorage. */
 function normalizeGuestCartItem(item) {
   const productId = Number(item?.productId);
   const quantity = Number(item?.quantity);
@@ -51,6 +53,7 @@ function normalizeGuestCartItem(item) {
   };
 }
 
+/** Read guest cart items from localStorage. */
 function readGuestCartItems() {
   try {
     const raw = localStorage.getItem(GUEST_CART_KEY);
@@ -71,8 +74,10 @@ function writeGuestCartItems(items) {
   localStorage.setItem(GUEST_CART_KEY, JSON.stringify(items));
 }
 
+/** Write guest cart items to localStorage. */
 export function CartProvider({ children }) {
   const { isSignedIn, profileLoaded, role } = useAuth();
+  const guestCartSyncPromiseRef = useRef(null);
   const [cartItems, setCartItems] = useState([]);
   const [isCartLoading, setIsCartLoading] = useState(false);
   const [cartError, setCartError] = useState("");
@@ -83,6 +88,8 @@ export function CartProvider({ children }) {
   async function loadCartItems() {
     setCartError("");
     setIsCartLoading(true);
+
+    // Try to load cart items from backend for logged in users.
     try {
       const response = await fetch(cartItemsUrl, {
         method: "GET",
@@ -228,15 +235,14 @@ export function CartProvider({ children }) {
     }
   }
 
+  // Sync guest cart to backend after login / registration.
+  // Do not clear localStorage until we know per-item outcomes: if this effect runs twice
+  // (e.g. React Strict Mode) or is cancelled mid-flight, a second run can still read items.
   async function syncGuestCartToBackend() {
     const guestItems = readGuestCartItems();
     if (!guestItems.length) {
       return 0;
     }
-
-    // Clear local storage immediately to prevent duplicate items being added to the cart.
-    // idk why but it happened...
-    writeGuestCartItems([]);
 
     const failedItems = [];
     for (const guestItem of guestItems) {
@@ -260,9 +266,7 @@ export function CartProvider({ children }) {
       }
     }
 
-    if (failedItems.length) {
-      writeGuestCartItems(failedItems);
-    }
+    writeGuestCartItems(failedItems);
     return failedItems.length;
   }
 
@@ -273,11 +277,17 @@ export function CartProvider({ children }) {
     setIsCartLoading(false);
   }
 
+  // Load cart items from backend or guest cart.
   useEffect(() => {
     let cancelled = false;
 
     async function loadBackendCartWithGuestSync() {
-      const failedSyncCount = await syncGuestCartToBackend();
+      if (!guestCartSyncPromiseRef.current) {
+        guestCartSyncPromiseRef.current = syncGuestCartToBackend().finally(() => {
+          guestCartSyncPromiseRef.current = null;
+        });
+      }
+      const failedSyncCount = await guestCartSyncPromiseRef.current;
       if (cancelled) {
         return;
       }
@@ -289,6 +299,7 @@ export function CartProvider({ children }) {
     }
 
     if (!isSignedIn) {
+      guestCartSyncPromiseRef.current = null;
       loadGuestCartItems();
     } else if (isBackendCartEnabled) {
       loadBackendCartWithGuestSync();

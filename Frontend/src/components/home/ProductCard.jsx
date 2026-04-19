@@ -1,6 +1,7 @@
 import { ProductCardImage } from "./ProductCardImage";
 import { Link } from "react-router-dom";
 
+/** Product card. Uses GET /api/product/image. */
 export function ProductCard({ product }) {
   const priceText = Number.isFinite(Number(product.price))
     ? `$${Number(product.price).toFixed(2)}`

@@ -2,10 +2,11 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { ACCOUNT_API_URL } from "../config/api";
 
 const WELCOME_KEY = "buttereoSignedInWelcome";
-const POST_LOGIN_REDIRECT_KEY = "buttereoPostLoginRedirect";
+export const POST_LOGIN_REDIRECT_KEY = "buttereoPostLoginRedirect";
 
 const AuthContext = createContext(null);
 
+/** Remove URL parameter. */
 function removeUrlParam(paramName) {
   const params = new URLSearchParams(window.location.search);
   params.delete(paramName);
@@ -24,19 +25,26 @@ function getDisplayName(user) {
   return "";
 }
 
-/** Backend may send "ADMIN", "admin", "USER", etc. */
+/**
+ * Set roles to "ADMIN" or "USER" / Fix this later...
+ */
 function normalizeRole(role) {
   if (!role || typeof role !== "string") return "";
   return role.trim().toUpperCase();
 }
 
+/**
+ * Check if user is logged in or logged out with keys from backend.
+ * Backend sends fromLogin=1 if logged in, or loggedOut=1 if logged out.
+ * Set isSignedIn to true if logged in, false if logged out.
+ */
 function readInitialAuthState() {
   const params = new URLSearchParams(window.location.search);
   const wasLoggedOut = params.get("loggedOut") === "1";
   const cameFromLogin = params.get("fromLogin") === "1";
   const redirectAfterLogin = localStorage.getItem(POST_LOGIN_REDIRECT_KEY) || "";
 
-  if (wasLoggedOut) {
+  if (wasLoggedOut) {       // Logged out, clear welcome key and redirect key.
     sessionStorage.removeItem(WELCOME_KEY);
     localStorage.removeItem(POST_LOGIN_REDIRECT_KEY);
     return {
@@ -46,7 +54,7 @@ function readInitialAuthState() {
     };
   }
 
-  if (cameFromLogin) {
+  if (cameFromLogin) {       // Logged in, set welcome key and redirect key.
     sessionStorage.setItem(WELCOME_KEY, "1");
     return {
       isSignedIn: true,
@@ -55,13 +63,16 @@ function readInitialAuthState() {
     };
   }
 
-  return {
+  return {      // Not logged in or logged out, check welcome key.
     isSignedIn: sessionStorage.getItem(WELCOME_KEY) === "1",
     clearParam: "",
     redirectAfterLogin: "",
   };
 }
 
+/**
+ *  Global state for authentication.
+ */
 export function AuthProvider({ children }) {
   const initialAuthState = useMemo(() => readInitialAuthState(), []);
   const [isSignedIn, setIsSignedIn] = useState(initialAuthState.isSignedIn);
@@ -85,19 +96,20 @@ export function AuthProvider({ children }) {
     }
   }, [initialAuthState]);
 
-  useEffect(() => {
+  // If logged in, load user profile.
+  useEffect(() => {         
     if (!isSignedIn) {
       setProfileLoaded(false);
       setRole("");
       return;
     }
-
+    
     async function loadAuthenticatedUser() {
       setProfileLoaded(false);
       try {
         const response = await fetch(ACCOUNT_API_URL, {
           method: "GET",
-          credentials: "include",
+          credentials: "include",     // Include credentials to get user profile.
         });
 
         if (response.ok) {
@@ -106,7 +118,7 @@ export function AuthProvider({ children }) {
           setRole(normalizeRole(user.role));
         }
       } catch {
-        // Keep basic UI flow if account endpoint is not ready.
+        // ...
       } finally {
         setProfileLoaded(true);
       }
@@ -115,6 +127,7 @@ export function AuthProvider({ children }) {
     loadAuthenticatedUser();
   }, [isSignedIn]);
 
+  // If user registers successfully, set welcome key and profile.
   function onRegisterSuccess(firstName) {
     sessionStorage.setItem(WELCOME_KEY, "1");
     setIsSignedIn(true);
@@ -123,13 +136,13 @@ export function AuthProvider({ children }) {
     setProfileLoaded(true);
   }
 
-  const welcomeText = isSignedIn
+  const welcomeText = isSignedIn    
     ? displayName
       ? `Hello ${displayName}, nice to meet you!`
       : "Happy to meet you! how are you doing?"
     : "Welcome to Buttereo";
 
-  const isAdmin = role === "ADMIN";
+  const isAdmin = role === "ADMIN";     // Setting isAdmin to true if role is "ADMIN".
 
   const value = useMemo(
     () => ({
@@ -147,6 +160,7 @@ export function AuthProvider({ children }) {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
+// Export the context to be used in other components.
 export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) {

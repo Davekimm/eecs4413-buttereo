@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { productFilterUrl } from "../../config/api";
 import { ProductCard } from "./ProductCard";
 
+/** Product list. Uses GET /api/product/filter. */
 export function ProductList({ filters }) {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

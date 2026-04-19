@@ -3,6 +3,7 @@ import { ORDER_ALL_API_URL } from "../../config/api";
 import { normalizeOrderForDisplay } from "../../utils/orderDto";
 import { OrderRow } from "./OrderRow";
 
+/** Order history. Uses GET /api/order/admin/all. */
 export function OrderHistory() {
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

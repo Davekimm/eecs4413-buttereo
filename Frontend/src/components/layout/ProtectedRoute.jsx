@@ -1,6 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
+// Protect routes for logged in users and admin users.
 export function ProtectedRoute({ children, requireAdmin }) {
   const { isSignedIn, isAdmin, profileLoaded } = useAuth();
 

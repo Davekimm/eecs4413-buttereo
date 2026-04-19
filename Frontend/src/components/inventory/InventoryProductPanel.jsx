@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { productDeleteUrl } from "../../config/api";
 import { ProductThumb } from "./ProductThumb";
 
+/** Admin inventory product panel. Uses DELETE /api/product/delete. */
 export function InventoryProductPanel({ products, onReload }) {
   const rows = products.length > 0 ? products : [];
   const [deleteError, setDeleteError] = useState("");

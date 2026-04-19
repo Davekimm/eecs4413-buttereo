@@ -13,6 +13,7 @@ const emptyForm = {
   available: true,
 };
 
+/** Add product page. Uses POST /api/product/add and PUT /api/product/image. */
 export function AddProductPage() {
   const [form, setForm] = useState(emptyForm);
   const [imageFile, setImageFile] = useState(null);

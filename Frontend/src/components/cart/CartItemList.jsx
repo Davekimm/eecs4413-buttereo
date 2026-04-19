@@ -1,6 +1,7 @@
 import { CartItem } from "./CartItem";
 import { useCart } from "../../context/CartContext";
 
+/** Cart item list. Uses GET /api/cart/items. */
 export function CartItemList() {
   const { cartItems, isCartLoading, cartError } = useCart();
 

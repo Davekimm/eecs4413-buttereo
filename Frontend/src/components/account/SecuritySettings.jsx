@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ACCOUNT_API_URL } from "../../config/api";
 
+/** Security settings. Uses PUT /api/account/change-password and DELETE /api/account/delete. */
 export function SecuritySettings() {
   const [cardNumber, setCardNumber] = useState("");
   const [cardSaveError, setCardSaveError] = useState("");
@@ -18,6 +19,7 @@ export function SecuritySettings() {
   const [deleteSuccess, setDeleteSuccess] = useState("");
   const [isDeletingAccount, setIsDeletingAccount] = useState(false);
 
+  /** Request to update card number. */
   async function requestUpdateCardNumber(nextCardNumber) {
     return fetch(ACCOUNT_API_URL, {
       method: "PUT",
@@ -45,6 +47,7 @@ export function SecuritySettings() {
     });
   }
 
+  /** Handle card update. */
   async function handleCardUpdate(event) {
     event.preventDefault();
     setCardSaveError("");

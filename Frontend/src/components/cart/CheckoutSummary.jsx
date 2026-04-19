@@ -2,11 +2,10 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ACCOUNT_API_URL, ORDER_RECENT_API_URL } from "../../config/api";
 import { normalizeOrderForCheckoutSummary } from "../../utils/orderDto";
-import { useAuth } from "../../context/AuthContext";
+import { POST_LOGIN_REDIRECT_KEY, useAuth } from "../../context/AuthContext";
 import { useCart } from "../../context/CartContext";
 
-const POST_LOGIN_REDIRECT_KEY = "buttereoPostLoginRedirect";
-
+/** Format currency value. */
 function formatCurrency(value) {
   const amount = Number(value);
   if (!Number.isFinite(amount)) {
@@ -16,6 +15,7 @@ function formatCurrency(value) {
   return `$${amount.toFixed(2)}`;
 }
 
+/** Checkout summary. Uses GET /api/account and POST /api/cart/place-order. */
 export function CheckoutSummary() {
   const navigate = useNavigate();
   const { isSignedIn, role } = useAuth();

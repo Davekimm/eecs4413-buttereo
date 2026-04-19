@@ -4,6 +4,7 @@ const SECTIONS = [
   { id: "security", label: "Security" },
 ];
 
+/** Account navigation. Uses GET /api/account. */
 export function AccountNav({ activeSection, onSectionChange }) {
   return (
     <aside className="panelBox accountNav">
