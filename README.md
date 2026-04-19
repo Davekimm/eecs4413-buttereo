@@ -20,8 +20,9 @@ I used <i>Springboot</i> for backend, <i>React</i> for frontend, and <i>MySQL</i
 
 4. Run the MySQL.
 
-5. Run the backend (port#: 8080). Tables & default Admin/user account will be generated.
-   - Check the terminal if the default accounts are created properly.
+5. Run the backend (port#: 8080). 
+   - Tables and default admin/user accounts will be generated.
+   - Please check the terminal if the default accounts are created properly.
 6. Open the frontend React project `./Frontend` in another IDE.
    
 7. Type npm install in the terminal to install node_mudules.
